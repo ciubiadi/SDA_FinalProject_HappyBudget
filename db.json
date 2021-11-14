@@ -1,0 +1,104 @@
+{
+  "wallets": [
+    {
+      "id": 1,
+      "name": "Wallet For Games",
+      "owner": "Ciubi",
+      "description": "This is a walletfor games"
+    },
+    {
+      "id": 3,
+      "name": "Wallet for investments",
+      "owner": "Mihaa",
+      "description": "To multily your money, you need to invest them"
+    },
+    {
+      "id": 4,
+      "name": "Wallet For Skins",
+      "owner": "Ciubi",
+      "description": "dascwefasd"
+    }
+  ],
+  "transactions": [
+    {
+      "id": 2,
+      "title": "Freelancer Website Project",
+      "type": "income",
+      "walletId": 3,
+      "date": "02-01-2020",
+      "description": "Another income ca bogatii",
+      "amount": 18.24,
+      "currency": "RON"
+    },
+    {
+      "id": 3,
+      "title": "SEO Services",
+      "type": "expense",
+      "walletId": 3,
+      "date": "03-01-2020",
+      "description": "Some Income Description",
+      "amount": 18.24,
+      "currency": "RON"
+    },
+    {
+      "id": 4,
+      "title": "Music Show Pub Test",
+      "type": "income",
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "Another income id 4",
+      "amount": 18.24,
+      "currency": "RON"
+    },
+    {
+      "id": 5,
+      "title": "123",
+      "type": "123",
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "123",
+      "amount": "123",
+      "currency": "RON"
+    },
+    {
+      "id": 6,
+      "title": "123",
+      "type": "123",
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "123",
+      "amount": "123",
+      "currency": "RON"
+    },
+    {
+      "id": 7,
+      "title": "123",
+      "type": "123",
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "123",
+      "amount": "123",
+      "currency": "RON"
+    },
+    {
+      "id": 8,
+      "title": "123",
+      "type": "123",
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "123",
+      "amount": "123",
+      "currency": "RON"
+    },
+    {
+      "id": 9,
+      "title": "123",
+      "type": "123",
+      "walletId": 3,
+      "date": "04-01-2020",
+      "description": "123",
+      "amount": "123",
+      "currency": "RON"
+    }
+  ]
+}
