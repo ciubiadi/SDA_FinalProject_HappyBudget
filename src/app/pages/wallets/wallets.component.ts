@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { WalletModel } from 'src/app/shared/models/wallet.model';
 import { WalletsService } from 'src/app/shared/services/wallets.service';
+import {MatTableModule} from '@angular/material/table';
 
 declare var $: any;
 
@@ -23,33 +27,48 @@ export class WalletsComponent implements OnInit {
   formValue !: FormGroup;
   walletModelObj : WalletModel = new WalletModel();
   walletsData !: any;
-  // walletsData: WalletModel[] = [];
   showAdd!: boolean;
+
+  displayedColumns : string[] = ['name','budget','owner','description','actions'];
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private walletsService: WalletsService,
     private formBuilder: FormBuilder,
-  ) { }
+  ) { 
+    this.getAllWallets();
+  }
 
   ngOnInit(): void {
-    /*SUPA*/
-    // let listen = this.api.listenAll();
-    // this.api.getWallets().then((data) => (this.wallets = data.wallets));
-    // this.clear();
-  /*ENDSUPA*/
-
     this.getAllWallets();
     this.formValue =  this.formBuilder.group({
       walletName : [''],
       ownerName : [''],
       walletDescription : [''] 
-    })
+    });
+    this.dataSource = new MatTableDataSource();
   }
 
   getAllWallets() {
     this.walletsService.getWallets().subscribe(res => {
       this.walletsData = res;
+      console.log(res);
+      this.dataSource = new MatTableDataSource(res);
+      console.log(this.dataSource);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
+  }
+  
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   clickAddWallet() {

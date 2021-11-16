@@ -65,8 +65,8 @@ import { WalletsComponent } from './pages/wallets/wallets.component';
     MatGridListModule,
     MatPaginatorModule,
     MatSortModule,
-    // MatTableDataSource,
-    NgbModule
+    NgbModule,
+    MatTableModule,
   ],
   declarations: [
     AppComponent,
