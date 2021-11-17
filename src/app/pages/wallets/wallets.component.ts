@@ -44,9 +44,9 @@ export class WalletsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllWallets();
     this.formValue =  this.formBuilder.group({
-      walletName : [''],
-      ownerName : [''],
-      walletDescription : [''] 
+      name : [''],
+      owner : [''],
+      description : [''] 
     });
     this.dataSource = new MatTableDataSource();
   }
@@ -60,7 +60,12 @@ export class WalletsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result.data);
+      if(result!=undefined && result.data)
+      {
+        this.postWalletDetails(result.data);
+      } else {
+        console.log('The form was closed');
+      }
     });
   }
 
@@ -74,7 +79,7 @@ export class WalletsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result.data);
+      console.log(result);
     });
   }
 
@@ -98,22 +103,20 @@ export class WalletsComponent implements OnInit {
     }
   }
 
-   postWalletDetails() {
-    this.walletModelObj.name = this.formValue.value.walletName;
+   postWalletDetails(data: any) {
+    this.walletModelObj.name = data.name;
     // this.walletsData[0].name = this.formValue.value.walletName;
-    this.walletModelObj.owner = this.formValue.value.ownerName;
+    this.walletModelObj.owner = data.owner;
     // this.walletsData[0].owner = this.formValue.value.ownerName;
-    this.walletModelObj.description = this.formValue.value.walletDescription;
+    this.walletModelObj.description = data.description;
     // this.walletsData[0].description = this.formValue.value.walletDescription;
 
     this.walletsService.postWallet(this.walletModelObj)
     .subscribe(res => {
       console.log(this.walletModelObj);
       this.showNotification('Wallet Added Succesfully', 'success');
-      let ref = document.getElementById('cancel');
-      ref?.click() ;
-      this.formValue.reset();
       this.walletsData.push(res);
+      this.getAllWallets();
     },
     err => {
       this.showNotification('Something went wrong', 'danger');

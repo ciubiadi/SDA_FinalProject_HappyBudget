@@ -17,35 +17,12 @@
       "name": "Wallet For Skins",
       "owner": "Ciubi",
       "description": "dascwefasd"
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "username": "ciubiadi",
-      "email": "ciubucciu.adrianalbert@gmail.com",
-      "firstName": "Adrian",
-      "lastName": "Ciubi",
-      "phone": "0740170123",
-      "about": "test description lorem5"
     },
     {
-      "id": 2,
-      "username": "mihasnie",
-      "email": "cibui.miha@gmail.com",
-      "firstName": "Mihaela",
-      "lastName": "Ciubi",
-      "phone": "0740113425",
-      "about": "test acconut here lorem5"
-    },
-    {
-      "id": 3,
-      "username": "krisskaze",
-      "email": "krissvip@gmail.com",
-      "firstName": "Cristian",
-      "lastName": "Popescu",
-      "phone": "07401124325",
-      "about": "test abither test lorem pisuum lorem5"
+      "id": 5,
+      "name": "Test wallet",
+      "owner": "Ciubi",
+      "description": "test Wallet description"
     }
   ],
   "transactions": [

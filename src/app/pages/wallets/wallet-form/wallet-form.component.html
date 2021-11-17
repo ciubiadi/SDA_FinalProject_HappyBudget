@@ -3,16 +3,16 @@
     <div mat-dialog-content style="margin-top:7px;">
         <form [formGroup]="formValue">
             <mat-form-field class="form-field-full-width" appearance="fill">
-                <mat-label for="walletName">Wallet Title</mat-label>
-                <input type="text" formControlName="walletName"  id="walletName" aria-describedby="walletName" matInput>
+                <mat-label for="name">Wallet Title</mat-label>
+                <input type="text" formControlName="name"  id="name" aria-describedby="name" matInput>
             </mat-form-field>
             <mat-form-field class="form-field-full-width" appearance="fill">
-                <mat-label for="ownerName">Owner Name</mat-label>
-                <input type="text" formControlName="ownerName" id="ownerName" aria-describedby="ownerName" matInput>
+                <mat-label for="owner">Owner Name</mat-label>
+                <input type="text" formControlName="owner" id="owner" aria-describedby="owner" matInput>
             </mat-form-field>
             <mat-form-field class="form-field-full-width" appearance="fill">
-                <mat-label for="walletDescription">Wallet Description</mat-label>
-                <textarea type="text" formControlName="walletDescription" id="walletDescription" aria-describedby="walletDescription" 
+                <mat-label for="description">Wallet Description</mat-label>
+                <textarea type="text" formControlName="description" id="description" aria-describedby="description" 
                 max-rows="2" placeholder="Ex: This wallet purpose is for ..." matInput></textarea>
             </mat-form-field>
             </form>
@@ -20,10 +20,10 @@
     <div mat-dialog-actions class="dialog-actions">
         <button class="btn btn-secondary" mat-button (click)="cancel()">Close</button>
         <div *ngIf="showAdd; else showEdit">
-            <button class="btn btn-success" (click)="add()">Add</button>
+            <button class="btn btn-success" (click)="submit()">Add</button>
         </div>
         <ng-template #showEdit>
-            <button class="btn btn-info" (click)="update()">Update</button>
+            <button class="btn btn-info" (click)="submit()">Update</button>
         </ng-template>
     </div>
 </div>

@@ -19,7 +19,7 @@ export class WalletFormComponent implements OnInit {
   walletsData !: any;
 
   constructor(
-    // public dialogRef: MatDialogRef<WalletFormComponent>,
+    // public dialogRef: MatDialogRef<WalletFormComponent>, !!DON'T KNOW WHICH VARIANT IS CORRECT!!!
     public dialogRef: MatDialogRef<WalletsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private formBuilder: FormBuilder,
@@ -30,16 +30,16 @@ export class WalletFormComponent implements OnInit {
     this.getAllWallets();
     if(this.data['action'] == 'add'){
       this.formValue =  this.formBuilder.group({
-        walletName : [''],
-        ownerName : [''],
-        walletDescription : [''] 
+        name : [''],
+        owner : [''],
+        description : [''] 
       });
       this.showAdd = true;
     } else {
       this.formValue =  this.formBuilder.group({
-        walletName : this.data['walletData']['name'],
-        ownerName : this.data['walletData']['owner'],
-        walletDescription : this.data['walletData']['description'] 
+        name : this.data['walletData']['name'],
+        owner : this.data['walletData']['owner'],
+        description : this.data['walletData']['description'] 
       });
       this.showAdd = false;
     }
@@ -51,16 +51,12 @@ export class WalletFormComponent implements OnInit {
     })
   }
 
-  add(): void {
-    this.dialogRef.close({data: 'you added'});
-  }
-
-  update(): void {
-    this.dialogRef.close({data: 'you updated'});
+  submit(): void {
+    this.dialogRef.close({data: this.formValue.value});
   }
 
   cancel(): void {
-    this.dialogRef.close({data: 'you canceled'});
+    this.dialogRef.close();
   }
 
   // onNoClick(): void {
