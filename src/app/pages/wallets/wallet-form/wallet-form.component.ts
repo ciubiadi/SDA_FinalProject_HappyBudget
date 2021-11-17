@@ -2,6 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { WalletModel } from 'src/app/shared/models/wallet.model';
 import { WalletsService } from 'src/app/shared/services/wallets.service';
 import { WalletsComponent } from '../wallets.component';
 import { DialogData } from '../wallets.component';
@@ -16,18 +17,15 @@ export class WalletFormComponent implements OnInit {
   showAdd: any;
 
   formValue !: FormGroup;
-  walletsData !: any;
 
   constructor(
     // public dialogRef: MatDialogRef<WalletFormComponent>, !!DON'T KNOW WHICH VARIANT IS CORRECT!!!
     public dialogRef: MatDialogRef<WalletsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private formBuilder: FormBuilder,
-    private walletsService: WalletsService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.getAllWallets();
     if(this.data['action'] == 'add'){
       this.formValue =  this.formBuilder.group({
         name : [''],
@@ -37,18 +35,13 @@ export class WalletFormComponent implements OnInit {
       this.showAdd = true;
     } else {
       this.formValue =  this.formBuilder.group({
+        id : this.data['walletData']['id'],
         name : this.data['walletData']['name'],
         owner : this.data['walletData']['owner'],
         description : this.data['walletData']['description'] 
       });
       this.showAdd = false;
     }
-  }
-
-  getAllWallets() {
-    this.walletsService.getWallets().subscribe(res => {
-      this.walletsData = res;
-    })
   }
 
   submit(): void {

@@ -16,13 +16,19 @@
       "id": 4,
       "name": "Wallet For Skins",
       "owner": "Ciubi",
-      "description": "dascwefasd"
+      "description": "TEST DESCRIPTION"
     },
     {
       "id": 5,
       "name": "Test wallet",
       "owner": "Ciubi",
       "description": "test Wallet description"
+    },
+    {
+      "id": 6,
+      "name": "ADI",
+      "owner": "ADI",
+      "description": "ADI"
     }
   ],
   "transactions": [

@@ -70,6 +70,7 @@ export class WalletsComponent implements OnInit {
   }
 
   onEditDialog(wallet: any): void {
+    // console.log(wallet);
     const dialogRef = this.dialog.open(WalletFormComponent, {
       width: '550px',
       data: {
@@ -79,16 +80,20 @@ export class WalletsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // console.log(result);
+      if(result!=undefined && result.data)
+      {
+        this.updateWalletDetails(result.data);
+      } else {
+        console.log('The form was closed');
+      }
     });
   }
 
   getAllWallets() {
     this.walletsService.getWallets().subscribe(res => {
       this.walletsData = res;
-      console.log(res);
       this.dataSource = new MatTableDataSource(res);
-      console.log(this.dataSource);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
@@ -113,19 +118,19 @@ export class WalletsComponent implements OnInit {
 
     this.walletsService.postWallet(this.walletModelObj)
     .subscribe(res => {
-      console.log(this.walletModelObj);
-      this.showNotification('Wallet Added Succesfully', 'success');
+      // console.log(this.walletModelObj);
+      // this.showNotification('Wallet Added Succesfully', 'success');
       this.walletsData.push(res);
       this.getAllWallets();
     },
     err => {
-      this.showNotification('Something went wrong', 'danger');
+      // this.showNotification('Something went wrong', 'danger');
     })
   }
 
   deleteWallet(wallet: any) {
     this.walletsService.deleteWallet(wallet.id).subscribe(res => {
-      this.showNotification('Wallet Deleted Succesfully', 'warning');
+      // this.showNotification('Wallet Deleted Succesfully', 'warning');
       this.getAllWallets();
     });
   }
@@ -141,17 +146,15 @@ export class WalletsComponent implements OnInit {
     this.formValue.controls['description'].setValue(wallet.description);
   }
 
-  updateWalletDetails(){
-    this.walletModelObj.name = this.formValue.value.walletName;
-    this.walletModelObj.owner = this.formValue.value.ownerName;
-    this.walletModelObj.description = this.formValue.value.walletDescription;
- 
+  updateWalletDetails(data: any){
+    this.walletModelObj.id = data.id;
+    this.walletModelObj.name = data.name;
+    this.walletModelObj.owner = data.owner;
+    this.walletModelObj.description = data.description;
+
     this.walletsService.updateWallet(this.walletModelObj, this.walletModelObj.id)
     .subscribe(res => {
-      this.showNotification('Wallet Updated Succesfully', 'info');
-      let ref = document.getElementById('cancel');
-      ref?.click() ;
-      this.formValue.reset(); 
+      // this.showNotification('Wallet Updated Succesfully', 'info');
       this.getAllWallets();
     });
   }
