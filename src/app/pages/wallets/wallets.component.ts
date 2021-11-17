@@ -21,8 +21,7 @@ export interface DialogData {
 })
 export class WalletsComponent implements OnInit {
 
-  animal: string;
-  name: string;
+  walletsDataDialog : any;
 
   walletWord !: any;  
   formValue !: FormGroup;
@@ -54,13 +53,28 @@ export class WalletsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(WalletFormComponent, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal},
+      width: '550px',
+      data: {
+        action: 'add'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      console.log(result.data);
+    });
+  }
+
+  onEditDialog(wallet: any): void {
+    const dialogRef = this.dialog.open(WalletFormComponent, {
+      width: '550px',
+      data: {
+        action: 'edit',
+        walletData: wallet
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result.data);
     });
   }
 
@@ -119,9 +133,9 @@ export class WalletsComponent implements OnInit {
     // this.showAdd = this.walletsService.getShowAdd();
 
     this.walletModelObj.id = wallet.id;
-    this.formValue.controls['walletName'].setValue(wallet.name);
-    this.formValue.controls['ownerName'].setValue(wallet.owner);
-    this.formValue.controls['walletDescription'].setValue(wallet.description);
+    this.formValue.controls['name'].setValue(wallet.name);
+    this.formValue.controls['owner'].setValue(wallet.owner);
+    this.formValue.controls['description'].setValue(wallet.description);
   }
 
   updateWalletDetails(){

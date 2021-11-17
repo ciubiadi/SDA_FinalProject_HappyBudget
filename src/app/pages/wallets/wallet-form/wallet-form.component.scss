@@ -1,0 +1,30 @@
+.wallet-form {
+    padding: 0.5em;
+
+    h1 {
+        margin-bottom: 1.4em;
+    }
+
+    form mat-form-field {
+        margin: 0.05em 0;
+        // padding: 1em;
+        width: 100%;
+        input {
+            padding: 0.2em;
+            width: 100%;
+        }
+    }
+
+    mat-dialog-actions {
+        float: right;
+    }
+
+    .dialog-actions{
+        display:flex;
+        justify-content: flex-end;
+        
+        button:not(:last-child){
+            margin-right:1.5em;
+        }
+    }
+}
