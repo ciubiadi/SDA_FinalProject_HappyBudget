@@ -5,9 +5,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { WalletModel } from 'src/app/shared/models/wallet.model';
 import { WalletsService } from 'src/app/shared/services/wallets.service';
-import {MatTableModule} from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { WalletFormComponent } from './wallet-form/wallet-form.component';
 
 declare var $: any;
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-wallets',
@@ -16,19 +21,14 @@ declare var $: any;
 })
 export class WalletsComponent implements OnInit {
 
-  /*Supa*/
-  // wallets: WalletModel[];
-  // wallet: WalletModel;
-  // actionLabel: string;
-  /*Supa End*/
+  animal: string;
+  name: string;
 
-  walletWord !: any;
-  
+  walletWord !: any;  
   formValue !: FormGroup;
   walletModelObj : WalletModel = new WalletModel();
   walletsData !: any;
   showAdd!: boolean;
-
   displayedColumns : string[] = ['name','budget','owner','description','actions'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -37,6 +37,7 @@ export class WalletsComponent implements OnInit {
   constructor(
     private walletsService: WalletsService,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) { 
     this.getAllWallets();
   }
@@ -49,6 +50,18 @@ export class WalletsComponent implements OnInit {
       walletDescription : [''] 
     });
     this.dataSource = new MatTableDataSource();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(WalletFormComponent, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
   }
 
   getAllWallets() {
@@ -69,13 +82,6 @@ export class WalletsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  clickAddWallet() {
-    this.formValue.reset();
-    this.showAdd = true;
-    // this.walletsService.setShowAdd(true);
-    // this.showAdd = this.walletsService.getShowAdd();
   }
 
    postWalletDetails() {
@@ -171,56 +177,4 @@ export class WalletsComponent implements OnInit {
         '</div>'
     });
   }
-
-  // addWallet() {
-  //   if (this.wallet.id) {
-  //     //Update if exists ID{
-  //     this.update();
-  //     return;
-  //   }
-  //   this.api
-  //     .addWallet(this.wallet)
-  //     .then((payload) => {
-  //       this.wallets.push(payload.data[0]);
-  //     })
-  //     .catch((err) => console.log(`Error in add WALLET ${err}`));
-  //   this.clear();
-  // }
-
-  // editWallet(wallet: WalletModel) {
-  //   this.wallet = wallet;
-  //   this.actionLabel = 'UPDATE';
-  // }
-
-  // update() {
-  //   this.api.update(this.wallet).then(() => {
-  //     let foundIndex = this.wallets.findIndex((t) => t.id == this.wallet.id);
-  //     this.wallets[foundIndex] = this.wallet;
-  //     this.clear();
-  //   });
-  // }
-
-  // checkWallet(walletCheck: WalletModel) {
-  //   walletCheck.done = !walletCheck.done;
-  //   this.api.updateCheck(walletCheck);
-  // }
-
-  // delete(wallet: WalletModel) {
-  //   this.api
-  //     .deleteWallet(wallet.id)
-  //     .then((res) => {
-  //       (this.wallets = this.arrayRemove(this.wallets, wallet.id));
-  //       // console.log('res', res.data)
-  //     });
-
-  // }
-
-  // arrayRemove(arr: WalletModel[], id: number) {
-  //   return arr.filter((ele) => ele.id != id);
-  // }
-
-  // clear() {
-  //   this.wallet = new WalletModel();
-  //   this.actionLabel = 'ADD';
-  // }
 }

@@ -6,12 +6,14 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { WalletsComponent } from 'src/app/pages/wallets/wallets.component';
+import { WalletTransactionsComponent } from 'src/app/pages/wallets/wallet-transactions/wallet-transactions.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'wallets',        component: WalletsComponent},
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'tables',         component: TablesComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent }
+    { path: 'dashboard',            component: DashboardComponent },
+    { path: 'wallets',              component: WalletsComponent},
+    { path: 'wallets/:walletId',    component: WalletTransactionsComponent},
+    { path: 'user-profile',         component: UserProfileComponent },
+    { path: 'tables',               component: TablesComponent },
+    { path: 'icons',                component: IconsComponent },
+    { path: 'maps',                 component: MapsComponent }
 ];
