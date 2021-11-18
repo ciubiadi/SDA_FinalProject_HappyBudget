@@ -15,6 +15,7 @@ import { WalletsComponent } from './pages/wallets/wallets.component';
 import { MaterialModule } from './material/material.module';
 import { WalletFormComponent } from './pages/wallets/wallet-form/wallet-form.component';
 import { WalletTransactionsComponent } from './pages/wallets/wallet-transactions/wallet-transactions.component';
+import { TransactionFormComponent } from './pages/wallets/transaction-form/transaction-form.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { WalletTransactionsComponent } from './pages/wallets/wallet-transactions
     AuthLayoutComponent,
     WalletsComponent,
     WalletFormComponent,
-    WalletTransactionsComponent
+    WalletTransactionsComponent,
+    TransactionFormComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

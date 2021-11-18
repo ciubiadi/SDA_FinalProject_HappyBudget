@@ -1,0 +1,21 @@
+.actions button {
+    padding: 0.5em;
+  }
+
+table {
+    width: 100%;
+}
+  
+th {
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+table tr .actions {
+    display: flex;
+    justify-content: center;
+}
+table tr td .actions button {
+    padding: 0.5em;
+    margin: 1.2em;
+}

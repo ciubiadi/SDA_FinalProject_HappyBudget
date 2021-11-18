@@ -23,12 +23,6 @@
       "name": "Test wallet",
       "owner": "Ciubi",
       "description": "test Wallet description"
-    },
-    {
-      "id": 6,
-      "name": "ADI",
-      "owner": "ADI",
-      "description": "ADI"
     }
   ],
   "transactions": [
