@@ -3,7 +3,8 @@ export class TransactionModel {
     title: string = "";
     type: string = "";
     walletId: number = 0;
-    date: Date = new Date();
+    // date: Date = new Date();
+    date: string = "";
     description:string = "";
     amount: number = 0;
     currency: string = "";

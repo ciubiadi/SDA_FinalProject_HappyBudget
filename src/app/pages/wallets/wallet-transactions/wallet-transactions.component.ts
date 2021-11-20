@@ -56,11 +56,11 @@ export class WalletTransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.getWalletTransactions();
     this.formValue =  this.formBuilder.group({
-      transactionTitle : [''],
-      transactionType : [''],
-      transactionDescription : [''],
-      transactionAmount : [''],
-      transactionDate: ['']
+      title : [''],
+      type : [''],
+      description : [''],
+      amount : [''],
+      date: ['']
     });
     this.dataSource = new MatTableDataSource();
   }
@@ -83,6 +83,8 @@ export class WalletTransactionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('wallets-transactions_openDialog: ');
+      console.log(result);
       if(result!=undefined && result.data)
       {
         this.postTransactionDetails(result.data);
@@ -93,17 +95,17 @@ export class WalletTransactionsComponent implements OnInit {
   }
 
   onEditDialog(transaction: any): void {
-    // console.log(wallet);
     const dialogRef = this.dialog.open(TransactionFormComponent, {
       width: '550px',
       data: {
         action: 'edit',
-        transactionData: transaction
+        transaction: transaction
       },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(result);
+      console.log('wallets-transactions_onEditDialog: ');
+      console.log(result);
       if(result!=undefined && result.data)
       {
         this.updateTransactionDetails(result.data);
@@ -145,15 +147,16 @@ export class WalletTransactionsComponent implements OnInit {
   postTransaction() {
     const id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
     let date = new Date('dd/mm/yyyy');
-    let finalDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
-    console.log(finalDate);
-    this.transactionModelObj.title = this.formValue.value.transactionTitle;
-    this.transactionModelObj.description = this.formValue.value.transactionDescription;
-    this.transactionModelObj.amount = this.formValue.value.transactionAmount;
-    this.transactionModelObj.type = this.formValue.value.transactionType;
+    // let finalDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
+    // console.log(finalDate);
+    this.transactionModelObj.title = this.formValue.value.title;
+    this.transactionModelObj.description = this.formValue.value.description;
+    this.transactionModelObj.amount = this.formValue.value.amount;
+    this.transactionModelObj.type = this.formValue.value.type;
     this.transactionModelObj.walletId = id;
-    this.transactionModelObj.date = new Date();
-    this.transactionModelObj.currency = this.formValue.value.transactionCurrency;
+    // this.transactionModelObj.date = new Date();
+    this.transactionModelObj.date = 'test';
+    this.transactionModelObj.currency = this.formValue.value.currency;
 
 
     this.transactionsService.postTransaction(this.transactionModelObj)
@@ -173,32 +176,33 @@ export class WalletTransactionsComponent implements OnInit {
     this.showAdd = false;
 
     this.transactionModelObj.id = transaction.id;
-    this.formValue.controls['transactionTitle'].setValue(transaction.title);
-    this.formValue.controls['transactionType'].setValue(transaction.type);
-    this.formValue.controls['transactionDescription'].setValue(transaction.description);
-    this.formValue.controls['transactionAmount'].setValue(transaction.amount);
-    this.formValue.controls['transactionDate'].setValue(transaction.date);
+    this.formValue.controls['title'].setValue(transaction.title);
+    this.formValue.controls['type'].setValue(transaction.type);
+    this.formValue.controls['description'].setValue(transaction.description);
+    this.formValue.controls['amount'].setValue(transaction.amount);
+    this.formValue.controls['date'].setValue(transaction.date);
   }
 
   deleteTransaction(transaction: any) {
     this.transactionsService.deleteTransaction(transaction.id).subscribe(res => {
-      this.showNotification('Transaction Deleted Succesfully', 'warning');
+      // this.showNotification('Transaction Deleted Succesfully', 'warning');
       this.getWalletTransactions();
     });
   }
 
   updateTransactionDetails(data: any){
-    this.transactionModelObj.title = this.formValue.value.transactionTitle;
+    this.transactionModelObj.id = data.id;
+    this.transactionModelObj.title = data.title;
     this.transactionModelObj.walletId = this.walletId;
-    this.transactionModelObj.description = this.formValue.value.transactionDescription;
-    this.transactionModelObj.type = this.formValue.value.transactionType;
-    this.transactionModelObj.amount = this.formValue.value.transactionAmount;
+    this.transactionModelObj.description = data.description;
+    this.transactionModelObj.type = data.type;
+    this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = this.formValue.value.transactionDate;
+    this.transactionModelObj.date = data.date;
  
     this.transactionsService.updateTransaction(this.transactionModelObj, this.transactionModelObj.id)
     .subscribe(res => {
-      this.showNotification('Transaction Updated Succesfully', 'info');
+      // this.showNotification('Transaction Updated Succesfully', 'info');
       let ref = document.getElementById('cancel');
       ref?.click() ;
       this.formValue.reset(); 
@@ -212,23 +216,27 @@ export class WalletTransactionsComponent implements OnInit {
   }
 
   postTransactionDetails(data: any) {
-    this.transactionModelObj.title = this.formValue.value.transactionTitle;
+    this.transactionModelObj.id = data.id;
+    this.transactionModelObj.title = data.title;
     this.transactionModelObj.walletId = this.walletId;
-    this.transactionModelObj.description = this.formValue.value.transactionDescription;
-    this.transactionModelObj.type = this.formValue.value.transactionType;
-    this.transactionModelObj.amount = this.formValue.value.transactionAmount;
+    this.transactionModelObj.description = data.description;
+    this.transactionModelObj.type = data.type;
+    this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = this.formValue.value.transactionDate;
+    this.transactionModelObj.date = data.date;
 
+    console.log('wallet-transactions_postTransactionDetails: ');
+    console.log(data);
     this.transactionsService.postTransaction(this.transactionModelObj)
     .subscribe(res => {
       console.log(this.transactionModelObj);
-      this.showNotification('Transaction Added Succesfully', 'success');
-      this.formValue.reset();
+      // this.showNotification('Transaction Added Succesfully', 'success');
+      // data.reset();
       this.transactionsData.push(res);
+      this.getWalletTransactions();
     },
     err => {
-      this.showNotification('Something went wrong', 'danger');
+      // this.showNotification('Something went wrong', 'danger');
     })
   }
 

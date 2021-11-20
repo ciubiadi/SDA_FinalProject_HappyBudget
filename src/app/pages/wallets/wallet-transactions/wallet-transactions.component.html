@@ -127,7 +127,7 @@
                   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Mia" #input>
                 </mat-form-field>
                 <div class="add-new-transaction">
-                  <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" (click)="openDialog()">
+                  <button class="btn btn-success" (click)="openDialog()">
                     Add Transaction
                   </button>
                 </div>

@@ -24,6 +24,7 @@ export class TransactionFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('transaction-form_ngOnInit: ');
     console.log(this.data);
     if(this.data['action'] == 'add'){
       this.formValue =  this.formBuilder.group({
@@ -36,18 +37,20 @@ export class TransactionFormComponent implements OnInit {
       this.showAdd = true;
     } else {
       this.formValue =  this.formBuilder.group({
-        id : this.data['transactionData']['id'],
-        title : this.data['transactionData']['title'],
-        type : this.data['transactionData']['type'],
-        description : this.data['transactionData']['description'],
-        amount: this.data['transactionData']['amount'],
-        date: this.data['transactionData']['date'] 
+        id : this.data['transaction']['id'],
+        title : this.data['transaction']['title'],
+        type : this.data['transaction']['type'],
+        description : this.data['transaction']['description'],
+        amount: this.data['transaction']['amount'],
+        date: this.data['transaction']['date'] 
       });
       this.showAdd = false;
     }
   }
 
   submit(): void {
+    console.log('transaction-form_submit: ');
+    console.log(this.formValue);
     this.dialogRef.close({data: this.formValue.value});
   }
 
