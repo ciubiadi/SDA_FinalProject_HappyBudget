@@ -1,9 +1,6 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { WalletModel } from 'src/app/shared/models/wallet.model';
-import { WalletsService } from 'src/app/shared/services/wallets.service';
 import { WalletsComponent } from '../wallets.component';
 import { DialogData } from '../wallets.component';
 

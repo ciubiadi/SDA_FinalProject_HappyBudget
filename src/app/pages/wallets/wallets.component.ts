@@ -9,9 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { WalletFormComponent } from './wallet-form/wallet-form.component';
 
 declare var $: any;
+
 export interface DialogData {
-  animal: string;
-  name: string;
 }
 
 @Component({
@@ -20,8 +19,6 @@ export interface DialogData {
   styleUrls: ['./wallets.component.scss']
 })
 export class WalletsComponent implements OnInit {
-
-  walletsDataDialog : any;
 
   walletWord !: any;  
   formValue !: FormGroup;

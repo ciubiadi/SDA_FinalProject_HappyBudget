@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TransactionModel } from 'src/app/shared/models/transaction.model';
 import { TransasctionsService } from 'src/app/shared/services/transasctions.service';
 import { WalletsService } from 'src/app/shared/services/wallets.service';
+import { TransactionFormComponent } from '../transaction-form/transaction-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 declare var $: any;
 
@@ -17,35 +19,32 @@ declare var $: any;
   styleUrls: ['./wallet-transactions.component.scss']
 })
 export class WalletTransactionsComponent implements OnInit {
-
-  walletId !: any;
-  walletData !: any;
   // walletModelObj : WalletModel = new WalletModel();
-  transactionsData !: any;
-  transactionModelObj : TransactionModel = new TransactionModel();
   // transactionModelObj : TransactionModel | undefined;
 
-  formTransaction !: FormGroup;
-  options!: FormGroup;
+  formValue !: FormGroup;
+  walletId !: any;
+  walletData !: any;
+  transactionModelObj : TransactionModel = new TransactionModel();
+  transactionsData !: any;
   showAdd!: boolean;
-  colorControl = new FormControl('primary');
-
-  expenses : any;
-  incomes : any;
-
   displayedColumns = ['title', 'description','type','amount','date','actions'];
-
   dataSource: MatTableDataSource<TransactionModel>;
-
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  colorControl = new FormControl('primary');
+  expenses : any;
+  incomes : any;
+  options!: FormGroup;
+  
   constructor(
     private walletsService: WalletsService,
     private transactionsService: TransasctionsService,
     private route: ActivatedRoute,
     private location: Location,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.options = formBuilder.group({
       color: this.colorControl
@@ -55,16 +54,15 @@ export class WalletTransactionsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getWallet();
-    this.getWalletExpenses();
-    this.getWalletIncomes();
-    this.formTransaction =  this.formBuilder.group({
+    this.getWalletTransactions();
+    this.formValue =  this.formBuilder.group({
       transactionTitle : [''],
       transactionType : [''],
       transactionDescription : [''],
       transactionAmount : [''],
       transactionDate: ['']
     });
+    this.dataSource = new MatTableDataSource();
   }
 
   applyFilter(filterValue: string) {
@@ -74,6 +72,45 @@ export class WalletTransactionsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TransactionFormComponent, {
+      width: '550px',
+      data: {
+        action: 'add'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result!=undefined && result.data)
+      {
+        this.postTransactionDetails(result.data);
+      } else {
+        console.log('The form was closed');
+      }
+    });
+  }
+
+  onEditDialog(transaction: any): void {
+    // console.log(wallet);
+    const dialogRef = this.dialog.open(TransactionFormComponent, {
+      width: '550px',
+      data: {
+        action: 'edit',
+        transactionData: transaction
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(result);
+      if(result!=undefined && result.data)
+      {
+        this.updateTransactionDetails(result.data);
+      } else {
+        console.log('The form was closed');
+      }
+    });
   }
 
   getWallet(): void {
@@ -110,20 +147,20 @@ export class WalletTransactionsComponent implements OnInit {
     let date = new Date('dd/mm/yyyy');
     let finalDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
     console.log(finalDate);
-    this.transactionModelObj.title = this.formTransaction.value.transactionTitle;
-    this.transactionModelObj.description = this.formTransaction.value.transactionDescription;
-    this.transactionModelObj.amount = this.formTransaction.value.transactionAmount;
-    this.transactionModelObj.type = this.formTransaction.value.transactionType;
+    this.transactionModelObj.title = this.formValue.value.transactionTitle;
+    this.transactionModelObj.description = this.formValue.value.transactionDescription;
+    this.transactionModelObj.amount = this.formValue.value.transactionAmount;
+    this.transactionModelObj.type = this.formValue.value.transactionType;
     this.transactionModelObj.walletId = id;
     this.transactionModelObj.date = new Date();
-    this.transactionModelObj.currency = this.formTransaction.value.transactionCurrency;
+    this.transactionModelObj.currency = this.formValue.value.transactionCurrency;
 
 
     this.transactionsService.postTransaction(this.transactionModelObj)
     .subscribe(res => {
       console.log(this.transactionModelObj);
       alert("Transaction Added Succesfully");
-      this.formTransaction.reset();
+      this.formValue.reset();
       this.transactionsData.push(res);
       this.getWalletTransactions();
     },
@@ -136,11 +173,11 @@ export class WalletTransactionsComponent implements OnInit {
     this.showAdd = false;
 
     this.transactionModelObj.id = transaction.id;
-    this.formTransaction.controls['transactionTitle'].setValue(transaction.title);
-    this.formTransaction.controls['transactionType'].setValue(transaction.type);
-    this.formTransaction.controls['transactionDescription'].setValue(transaction.description);
-    this.formTransaction.controls['transactionAmount'].setValue(transaction.amount);
-    this.formTransaction.controls['transactionDate'].setValue(transaction.date);
+    this.formValue.controls['transactionTitle'].setValue(transaction.title);
+    this.formValue.controls['transactionType'].setValue(transaction.type);
+    this.formValue.controls['transactionDescription'].setValue(transaction.description);
+    this.formValue.controls['transactionAmount'].setValue(transaction.amount);
+    this.formValue.controls['transactionDate'].setValue(transaction.date);
   }
 
   deleteTransaction(transaction: any) {
@@ -150,46 +187,44 @@ export class WalletTransactionsComponent implements OnInit {
     });
   }
 
-  updateTransactionDetails(){
-    this.transactionModelObj.title = this.formTransaction.value.transactionTitle;
+  updateTransactionDetails(data: any){
+    this.transactionModelObj.title = this.formValue.value.transactionTitle;
     this.transactionModelObj.walletId = this.walletId;
-    this.transactionModelObj.description = this.formTransaction.value.transactionDescription;
-    this.transactionModelObj.type = this.formTransaction.value.transactionType;
-    this.transactionModelObj.amount = this.formTransaction.value.transactionAmount;
+    this.transactionModelObj.description = this.formValue.value.transactionDescription;
+    this.transactionModelObj.type = this.formValue.value.transactionType;
+    this.transactionModelObj.amount = this.formValue.value.transactionAmount;
     this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = this.formTransaction.value.transactionDate;
+    this.transactionModelObj.date = this.formValue.value.transactionDate;
  
     this.transactionsService.updateTransaction(this.transactionModelObj, this.transactionModelObj.id)
     .subscribe(res => {
       this.showNotification('Transaction Updated Succesfully', 'info');
       let ref = document.getElementById('cancel');
       ref?.click() ;
-      this.formTransaction.reset(); 
+      this.formValue.reset(); 
       this.getWalletTransactions();
     });
   }
 
   clickAddTransaction() {
-    this.formTransaction.reset();
+    this.formValue.reset();
     this.showAdd = true;
   }
 
-  postTransactionDetails() {
-    this.transactionModelObj.title = this.formTransaction.value.transactionTitle;
+  postTransactionDetails(data: any) {
+    this.transactionModelObj.title = this.formValue.value.transactionTitle;
     this.transactionModelObj.walletId = this.walletId;
-    this.transactionModelObj.description = this.formTransaction.value.transactionDescription;
-    this.transactionModelObj.type = this.formTransaction.value.transactionType;
-    this.transactionModelObj.amount = this.formTransaction.value.transactionAmount;
+    this.transactionModelObj.description = this.formValue.value.transactionDescription;
+    this.transactionModelObj.type = this.formValue.value.transactionType;
+    this.transactionModelObj.amount = this.formValue.value.transactionAmount;
     this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = this.formTransaction.value.transactionDate;
+    this.transactionModelObj.date = this.formValue.value.transactionDate;
 
     this.transactionsService.postTransaction(this.transactionModelObj)
     .subscribe(res => {
       console.log(this.transactionModelObj);
       this.showNotification('Transaction Added Succesfully', 'success');
-      let ref = document.getElementById('cancel');
-      ref?.click() ;
-      this.formTransaction.reset();
+      this.formValue.reset();
       this.transactionsData.push(res);
     },
     err => {

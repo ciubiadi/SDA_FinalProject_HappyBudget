@@ -127,44 +127,45 @@
                   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Mia" #input>
                 </mat-form-field>
                 <div class="add-new-transaction">
-                  <button class="btn btn-success" (click)="clickAddTransaction()" data-toggle="modal" data-target="#exampleModal">
-                    Add Entry
+                  <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" (click)="openDialog()">
+                    Add Transaction
                   </button>
                 </div>
             </div>
             <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="title">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Title</th>
-                <td mat-cell *matCellDef="let element">{{element.title}}</td>
+                <td mat-cell *matCellDef="let transaction">{{transaction.title}}</td>
             </ng-container>
             <ng-container matColumnDef="description">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Description</th>
-                <td mat-cell *matCellDef="let element">{{element.description}}</td>
+                <td mat-cell *matCellDef="let transaction">{{transaction.description}}</td>
             </ng-container>
             <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Type</th>
-                <td mat-cell *matCellDef="let element" class="text-uppercase font-weight-bold"
-                [ngStyle]="element.type == 'income' ? { 'color':'green' } : {'color': 'red'}">{{ element.type }}</td>
+                <td mat-cell *matCellDef="let transaction" class="text-uppercase font-weight-bold"
+                [ngStyle]="transaction.type == 'income' ? { 'color':'green' } : {'color': 'red'}">{{ transaction.type }}</td>
             </ng-container>
             <ng-container matColumnDef="amount">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Amount</th>
-                <td mat-cell *matCellDef="let element">{{element.amount}} {{ element.currency }}</td>
+                <td mat-cell *matCellDef="let transaction">{{transaction.amount}} {{ transaction.currency }}</td>
             </ng-container>
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Date</th>
-                <td mat-cell *matCellDef="let element">{{element.date}}</td>
+                <td mat-cell *matCellDef="let transaction">{{transaction.date}}</td>
             </ng-container>
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef class="text-primary text-center">Actions</th>
-                <td mat-cell *matCellDef="let element">
-                <div class="actions">
-                    <button class="btn btn-info" (click)="onEdit(element)">
-                        <mat-icon>edit</mat-icon>
+                <td mat-cell *matCellDef="let transaction">
+                  <div class="actions">
+                    <button class="btn btn-info" (click)="onEditDialog(transaction)">
+                      <mat-icon>edit</mat-icon>
                     </button>
-                    <button class="btn btn-danger" (click)="deleteTransaction(element)">
-                        <mat-icon>delete</mat-icon>
+                    <button class="btn btn-danger" (click)="deleteTransaction(transaction)">
+                      <mat-icon>delete</mat-icon>
                     </button>
-                </div>
+                    <button class="btn btn-secondary" style="float:left">View Details</button>
+                  </div>
                 </td>
             </ng-container>
 
