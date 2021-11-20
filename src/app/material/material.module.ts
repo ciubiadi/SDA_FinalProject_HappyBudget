@@ -17,6 +17,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -38,7 +39,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatGridListModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatNativeDateModule
   ],
   exports: [
     CommonModule,
@@ -58,7 +60,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatGridListModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

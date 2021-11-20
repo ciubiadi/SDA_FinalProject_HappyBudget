@@ -7,11 +7,16 @@
                 <input type="text" formControlName="title"  id="title" aria-describedby="title" matInput>
             </mat-form-field>
             <mat-form-field class="form-field-full-width" appearance="fill">
-                <mat-label for="type">Owner Name</mat-label>
-                <input type="text" formControlName="type" id="type" aria-describedby="type" matInput>
+                <mat-label for="type">Transaction Type</mat-label>
+                <mat-select formControlName="type" id="type" aria-describedby="type">
+                    <mat-option *ngFor="let transactiontype of enumTransactionTypes" [value]="transactiontype">
+                      {{StateTransactionTypes[transactiontype]}}
+                    </mat-option>
+                </mat-select>    
+                <!-- <input type="text" formControlName="type" id="type" aria-describedby="type" matInput> -->
             </mat-form-field>
             <mat-form-field class="form-field-full-width" appearance="fill">
-                <mat-label for="description">Transaction Type</mat-label>
+                <mat-label for="description">Transaction Description</mat-label>
                 <textarea type="text" formControlName="description" id="description" aria-describedby="tydescriptionpe" 
                 max-rows="2" placeholder="Ex: This transaction purpose is for ..." matInput></textarea>
             </mat-form-field>
@@ -21,7 +26,10 @@
             </mat-form-field>
             <mat-form-field class="form-field-full-width" appearance="fill">
                 <mat-label for="date">Transaction Date</mat-label>
-                <input type="text" formControlName="date" id="date" aria-describedby="date" matInput>
+                <input matInput [matDatepicker]="picker" formControlName="date" id="date" aria-describedby="date" matInput>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker color="primary"></mat-datepicker>
+                <!-- <input type="text" formControlName="date" id="date" aria-describedby="date" matInput> -->
             </mat-form-field>
             </form>
     </div>

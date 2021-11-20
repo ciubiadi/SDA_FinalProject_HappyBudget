@@ -2,6 +2,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { TransactionTypes } from 'src/app/shared/services/transasctions.service';
 import { WalletTransactionsComponent } from '../wallet-transactions/wallet-transactions.component';
 import { DialogData } from '../wallets.component';
 
@@ -16,14 +17,21 @@ export class TransactionFormComponent implements OnInit {
 
   formValue !: FormGroup;
 
+  StateTransactionTypes = TransactionTypes;
+  enumTransactionTypes=[];
+
   constructor(
     // public dialogRef: MatDialogRef<WalletFormComponent>, !!DON'T KNOW WHICH VARIANT IS CORRECT!!!
     public dialogRef: MatDialogRef<WalletTransactionsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    this.enumTransactionTypes=Object.keys(this.StateTransactionTypes);
+   }
 
   ngOnInit(): void {
+    console.log('TRANSACTIONTYPES here : ');
+    console.log(this.StateTransactionTypes);
     console.log('transaction-form_ngOnInit: ');
     console.log(this.data);
     if(this.data['action'] == 'add'){
