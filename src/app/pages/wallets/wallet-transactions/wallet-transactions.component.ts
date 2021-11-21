@@ -87,6 +87,7 @@ export class WalletTransactionsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(TransactionFormComponent, {
       width: '550px',
+      disableClose: true,
       data: {
         action: 'add'
       }
@@ -105,6 +106,7 @@ export class WalletTransactionsComponent implements OnInit {
   onEditDialog(transaction: any): void {
     const dialogRef = this.dialog.open(TransactionFormComponent, {
       width: '550px',
+      disableClose: true,
       data: {
         action: 'edit',
         transaction: transaction

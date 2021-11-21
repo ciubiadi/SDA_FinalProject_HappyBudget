@@ -51,6 +51,7 @@ export class WalletsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(WalletFormComponent, {
       width: '550px',
+      disableClose: true,
       data: {
         action: 'add'
       }
@@ -70,6 +71,7 @@ export class WalletsComponent implements OnInit {
     // console.log(wallet);
     const dialogRef = this.dialog.open(WalletFormComponent, {
       width: '550px',
+      disableClose: true,
       data: {
         action: 'edit',
         walletData: wallet
