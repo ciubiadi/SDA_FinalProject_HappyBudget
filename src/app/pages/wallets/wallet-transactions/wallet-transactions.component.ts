@@ -229,6 +229,8 @@ export class WalletTransactionsComponent implements OnInit {
   }
 
   updateAtWallet(): void {
+    console.log(this.walletModelObj);
+    this.walletModelObj = this.walletData;
     this.walletModelObj.id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
     this.walletModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
     this.walletsService.updateWallet(this.walletModelObj, this.walletModelObj.id)

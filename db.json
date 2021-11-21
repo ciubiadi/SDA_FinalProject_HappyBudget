@@ -5,7 +5,7 @@
       "name": "Wallet For Games",
       "owner": "Ciubi",
       "createdAt": "14/11/2021",
-      "updatedAt": "14/11/2021",
+      "updatedAt": "21/11/2021",
       "description": "This is a walletfor games"
     },
     {
@@ -18,18 +18,18 @@
     },
     {
       "id": 4,
-      "name": "Wallet For Skins",
+      "name": "Wallet for Tests",
       "owner": "Ciubi",
-      "createdAt": "14/11/2021",
-      "updatedAt": "14/11/2021",
-      "description": "TEST DESCRIPTION"
+      "createdAt": "14/10/2010",
+      "updatedAt": "21/11/2021",
+      "description": "dasdasdsaas dass das das das"
     },
     {
       "id": 5,
       "name": "Test wallet",
       "owner": "Ciubi",
       "createdAt": "14/11/2021",
-      "updatedAt": "14/11/2021",
+      "updatedAt": "21/11/2021",
       "description": "test Wallet description"
     }
   ],
@@ -72,6 +72,97 @@
       "categpries": "",
       "people": "",
       "currency": "RON"
+    },
+    {
+      "title": "Test Transaction 1",
+      "type": "expense",
+      "walletId": 4,
+      "createdAt": "21/11/2021",
+      "updatedAt": "21/11/2021",
+      "description": "Test description 1",
+      "amount": "120",
+      "categpries": "",
+      "people": "",
+      "currency": "RON",
+      "id": 5
+    },
+    {
+      "title": "Test Transaction 2",
+      "type": "income",
+      "walletId": 4,
+      "createdAt": "05/11/2021",
+      "updatedAt": "05/11/2021",
+      "description": "Test Transaction 2",
+      "amount": "23",
+      "categpries": "",
+      "people": "",
+      "currency": "RON",
+      "id": 6
+    },
+    {
+      "title": "First transaction",
+      "type": "income",
+      "walletId": 1,
+      "createdAt": "08/11/2021",
+      "updatedAt": "08/11/2021",
+      "description": "salary",
+      "amount": "321312",
+      "categpries": "",
+      "people": "",
+      "currency": "RON",
+      "id": 7
+    },
+    {
+      "title": "first expense",
+      "type": "expense",
+      "walletId": 1,
+      "createdAt": "17/11/2021",
+      "updatedAt": "17/11/2021",
+      "description": "dada",
+      "amount": "211",
+      "categpries": "",
+      "people": "",
+      "currency": "RON",
+      "id": 8
+    },
+    {
+      "title": "testse",
+      "type": "expense",
+      "walletId": 5,
+      "createdAt": "16/11/2021",
+      "updatedAt": "16/11/2021",
+      "description": "dadsad",
+      "amount": "1241",
+      "categpries": "",
+      "people": "",
+      "currency": "RON",
+      "id": 9
+    },
+    {
+      "title": "test",
+      "type": "income",
+      "walletId": 5,
+      "createdAt": "19/11/2021",
+      "updatedAt": "19/11/2021",
+      "description": "dasdas",
+      "amount": "3214",
+      "categpries": "",
+      "people": "",
+      "currency": "RON",
+      "id": 10
+    },
+    {
+      "title": "dada",
+      "type": "income",
+      "walletId": 5,
+      "createdAt": "22/12/2021",
+      "updatedAt": "22/12/2021",
+      "description": "test",
+      "amount": "53421",
+      "categpries": "",
+      "people": "",
+      "currency": "RON",
+      "id": 11
     }
   ]
 }

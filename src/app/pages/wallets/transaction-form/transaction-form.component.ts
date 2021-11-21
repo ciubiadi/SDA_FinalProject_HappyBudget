@@ -30,10 +30,7 @@ export class TransactionFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log('TRANSACTIONTYPES here : ');
-    console.log(this.StateTransactionTypes);
-    console.log('transaction-form_ngOnInit: ');
-    console.log(this.data);
+
     if(this.data['action'] == 'add'){
       this.formValue =  this.formBuilder.group({
         title : [''],
