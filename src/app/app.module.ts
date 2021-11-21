@@ -16,6 +16,7 @@ import { MaterialModule } from './material/material.module';
 import { WalletFormComponent } from './pages/wallets/wallet-form/wallet-form.component';
 import { WalletTransactionsComponent } from './pages/wallets/wallet-transactions/wallet-transactions.component';
 import { TransactionFormComponent } from './pages/wallets/transaction-form/transaction-form.component';
+import { TransactionComponent } from './pages/wallets/transaction/transaction.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { TransactionFormComponent } from './pages/wallets/transaction-form/trans
     WalletsComponent,
     WalletFormComponent,
     WalletTransactionsComponent,
-    TransactionFormComponent
+    TransactionFormComponent,
+    TransactionComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

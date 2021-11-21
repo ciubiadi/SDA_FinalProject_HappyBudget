@@ -1,3 +1,5 @@
+import { TransactionCategoryModel } from "./transaction-categories.model";
+
 export class TransactionModel {
     id: number = 0;
     title: string = "";
@@ -11,4 +13,5 @@ export class TransactionModel {
     categpries: string ="";
     people: string="";
     currency: string = "";
+    categories?: TransactionCategoryModel[];
 }

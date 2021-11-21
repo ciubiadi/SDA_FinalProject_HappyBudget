@@ -12,6 +12,7 @@ import { TransactionFormComponent } from '../transaction-form/transaction-form.c
 import { MatDialog } from '@angular/material/dialog';
 import { DateAdapter } from '@angular/material/core';
 import { WalletModel } from 'src/app/shared/models/wallet.model';
+import { TransactionComponent } from '../transaction/transaction.component';
 
 declare var $: any;
 
@@ -117,6 +118,15 @@ export class WalletTransactionsComponent implements OnInit {
       } else {
         console.log('The form was closed');
       }
+    });
+  }
+
+  viewTransaction(transaction: any): void {
+    const dialogRef = this.dialog.open(TransactionComponent, {
+      width: '550px',
+      data: {
+        transaction: transaction
+      },
     });
   }
 
