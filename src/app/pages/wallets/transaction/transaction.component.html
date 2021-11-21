@@ -1,3 +1,64 @@
-<div class="container">
-    <h1>{{ transaction.title }}</h1>
-</div>
+<div class="container-fluid">
+    <div class="row">
+<div class="col-12 mb-5 mb-xl-0">
+    <div class="card card-profile shadow">
+      <div class="row justify-content-center">
+        <div class="col-lg-3 order-lg-2">
+          <div class="card-profile-image">
+            <a href="javascript:void(0)">
+              <!-- <img src="assets/img/theme/team-4-800x800.jpg" class="rounded-circle"> -->
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+        <div class="d-flex justify-content-center">
+          <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a> -->
+          <h1 class="text-capitalize">{{ transaction.title }}</h1>
+          <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a> -->
+        </div>
+      </div>
+      <div class="card-body pt-0 pt-md-4">
+        <!-- <div class="row">
+          <div class="col">
+            <div class="card-profile-stats d-flex justify-content-center">
+              <div>
+                <span class="heading">{{ transaction.length }}</span>
+                <span class="description">Transactions</span>
+              </div>
+              <div>
+                <span class="heading">{{ expenses.length }}</span>
+                <span class="description">Expenses</span>
+              </div>
+              <div>
+                <span class="heading">{{ incomes.length }}</span>
+                <span class="description">Incomes</span>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="text-center">
+          <h3>
+            Wallet Owner<span class="font-weight-light">: {{ transaction.title }} </span>
+          </h3>
+          <div class="h5 font-weight-300">
+            <i class="ni location_pin mr-2"></i>Created on: {{ transaction.createdAt }}
+          </div>
+          <div class="h5 font-weight-300">
+            <i class="ni location_pin mr-2"></i>Last update on: {{ transaction.updatedAt }}
+          </div>
+          <div class="h5 mt-4">
+            <i class="ni business_briefcase-24 mr-2"></i>Categories Of Transaction :
+          </div>
+          <div>
+            <i class="ni education_hat mr-2"></i>{{ transaction.categories }}
+          </div>
+          <hr class="my-4" />
+          <p>{{ transaction.description }}</p>
+          <a href="javascript:void(0)">Show more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
