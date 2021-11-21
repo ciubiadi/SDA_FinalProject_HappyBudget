@@ -40,7 +40,7 @@ export class TransactionFormComponent implements OnInit {
         description : [''],
         type : [''],
         amount: [''],
-        date: [''] 
+        date: null,
       });
       this.showAdd = true;
     } else {
@@ -50,7 +50,7 @@ export class TransactionFormComponent implements OnInit {
         type : this.data['transaction']['type'],
         description : this.data['transaction']['description'],
         amount: this.data['transaction']['amount'],
-        date: this.data['transaction']['date'] 
+        date: this.data['transaction']['date']
       });
       this.showAdd = false;
     }

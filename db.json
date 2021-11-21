@@ -4,24 +4,32 @@
       "id": 1,
       "name": "Wallet For Games",
       "owner": "Ciubi",
+      "createdAt": "14/11/2021",
+      "updatedAt": "14/11/2021",
       "description": "This is a walletfor games"
     },
     {
       "id": 3,
       "name": "Wallet for investments",
       "owner": "Mihaa",
+      "createdAt": "14/11/2021",
+      "updatedAt": "14/11/2021",
       "description": "To multily your money, you need to invest them"
     },
     {
       "id": 4,
       "name": "Wallet For Skins",
       "owner": "Ciubi",
+      "createdAt": "14/11/2021",
+      "updatedAt": "14/11/2021",
       "description": "TEST DESCRIPTION"
     },
     {
       "id": 5,
       "name": "Test wallet",
       "owner": "Ciubi",
+      "createdAt": "14/11/2021",
+      "updatedAt": "14/11/2021",
       "description": "test Wallet description"
     }
   ],
@@ -31,9 +39,12 @@
       "title": "Freelancer Website Project",
       "type": "income",
       "walletId": 3,
-      "date": "2021-11-14T22:00:00.000Z",
+      "createdAt": "18/11/2021",
+      "updatedAt": "11/11/2021",
       "description": "Another income ca bogatii",
       "amount": 18.24,
+      "categpries": "",
+      "people": "",
       "currency": "RON"
     },
     {
@@ -41,9 +52,12 @@
       "title": "SEO Services",
       "type": "expense",
       "walletId": 3,
-      "date": "2021-11-16T22:00:00.000Z",
+      "createdAt": "18/11/2021",
+      "updatedAt": "10/11/2021",
       "description": "Some Income Description",
       "amount": 18.24,
+      "categpries": "",
+      "people": "",
       "currency": "RON"
     },
     {
@@ -51,20 +65,13 @@
       "title": "Music Show Pub Test",
       "type": "income",
       "walletId": 3,
-      "date": "2021-11-08T22:00:00.000Z",
+      "createdAt": "18/11/2021",
+      "updatedAt": "18/11/2021",
       "description": "Another income id 4",
       "amount": 18.24,
+      "categpries": "",
+      "people": "",
       "currency": "RON"
-    },
-    {
-      "title": "Some test transaction",
-      "type": "Expense",
-      "walletId": 3,
-      "date": "2021-11-20T22:00:00.000Z",
-      "description": "thisi s the description",
-      "amount": "20.30",
-      "currency": "RON",
-      "id": 5
     }
   ]
 }

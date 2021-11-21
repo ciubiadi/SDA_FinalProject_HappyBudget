@@ -1,4 +1,4 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 500px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 500px; background-image: url(assets/img/theme/money-cover.jpg); background-size: cover; background-position: left top;">
     <!-- Mask -->
     <span class="mask bg-gradient-success opacity-8"></span>
     <!-- Header container -->
@@ -9,7 +9,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Savings</h5>
                       <span class="h2 font-weight-bold mb-0">924</span>
                     </div>
                     <div class="col-auto">
@@ -30,7 +30,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Transactions</h5>
                       <span class="h2 font-weight-bold mb-0">49,65%</span>
                     </div>
                     <div class="col-auto">
@@ -51,8 +51,8 @@
   </div>
   <div class="container-fluid mt--7">
     <div class="row">
-      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-        <div class="card card-profile shadow">
+      <div class="col-xl-4 order-xl-2 col-lg-12 mb-5 mb-xl-0">
+        <div class="card card-profile shadow" *ngIf="walletData && expenses && incomes && transactionsData">
           <div class="row justify-content-center">
             <div class="col-lg-3 order-lg-2">
               <div class="card-profile-image">
@@ -65,7 +65,7 @@
           <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
             <div class="d-flex justify-content-center">
               <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a> -->
-              <h2>My Wallet Name</h2>
+              <h1 class="text-capitalize">{{ walletData.name }}</h1>
               <!-- <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a> -->
             </div>
           </div>
@@ -74,35 +74,38 @@
               <div class="col">
                 <div class="card-profile-stats d-flex justify-content-center">
                   <div>
-                    <span class="heading">22</span>
+                    <span class="heading">{{ transactionsData.length }}</span>
                     <span class="description">Transactions</span>
                   </div>
                   <div>
-                    <span class="heading">10</span>
-                    <span class="description">Days</span>
+                    <span class="heading">{{ expenses.length }}</span>
+                    <span class="description">Expenses</span>
                   </div>
                   <div>
-                    <span class="heading">89</span>
-                    <span class="description">Comments</span>
+                    <span class="heading">{{ incomes.length }}</span>
+                    <span class="description">Incomes</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="text-center">
               <h3>
-                Jessica Jones<span class="font-weight-light">, 27</span>
+                Wallet Owner<span class="font-weight-light">: {{ walletData.owner }} </span>
               </h3>
               <div class="h5 font-weight-300">
-                <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                <i class="ni location_pin mr-2"></i>Created on: {{ walletData.createdAt }}
+              </div>
+              <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i>Last update on: {{ walletData.updatedAt }}
               </div>
               <div class="h5 mt-4">
-                <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                <i class="ni business_briefcase-24 mr-2"></i>Main Categories Of Transactions :
               </div>
               <div>
-                <i class="ni education_hat mr-2"></i>University of Computer Science
+                <i class="ni education_hat mr-2"></i>{{ transactionsData.categories }}
               </div>
               <hr class="my-4" />
-              <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+              <p>{{ walletData.description }}</p>
               <a href="javascript:void(0)">Show more</a>
             </div>
           </div>
@@ -152,7 +155,7 @@
             </ng-container>
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Date</th>
-                <td mat-cell *matCellDef="let transaction">{{transaction.date}}</td>
+                <td mat-cell *matCellDef="let transaction">{{transaction.updatedAt}}</td>
             </ng-container>
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef class="text-primary text-center">Actions</th>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Location } from '@angular/common';
+import { getLocaleDateFormat, Location } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +10,8 @@ import { TransasctionsService } from 'src/app/shared/services/transasctions.serv
 import { WalletsService } from 'src/app/shared/services/wallets.service';
 import { TransactionFormComponent } from '../transaction-form/transaction-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DateAdapter } from '@angular/material/core';
+import { WalletModel } from 'src/app/shared/models/wallet.model';
 
 declare var $: any;
 
@@ -19,7 +21,7 @@ declare var $: any;
   styleUrls: ['./wallet-transactions.component.scss']
 })
 export class WalletTransactionsComponent implements OnInit {
-  // walletModelObj : WalletModel = new WalletModel();
+  walletModelObj : WalletModel = new WalletModel();
   // transactionModelObj : TransactionModel | undefined;
 
   formValue !: FormGroup;
@@ -44,23 +46,30 @@ export class WalletTransactionsComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private dateAdapter: DateAdapter<Date>
   ) {
     this.options = formBuilder.group({
       color: this.colorControl
     });
+    this.getWallet();
     this.getWalletTransactions();
     this.walletId = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
+    this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
    }
 
   ngOnInit(): void {
+    this.walletData = this.getWallet();
     this.getWalletTransactions();
+    this.getWalletExpenses();
+    this.getWalletIncomes();
+
     this.formValue =  this.formBuilder.group({
       title : [''],
       type : [''],
       description : [''],
       amount : [''],
-      date: ['']
+      date: null,
     });
     this.dataSource = new MatTableDataSource();
   }
@@ -83,8 +92,6 @@ export class WalletTransactionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('wallets-transactions_openDialog: ');
-      console.log(result);
       if(result!=undefined && result.data)
       {
         this.postTransactionDetails(result.data);
@@ -104,8 +111,6 @@ export class WalletTransactionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('wallets-transactions_onEditDialog: ');
-      console.log(result);
       if(result!=undefined && result.data)
       {
         this.updateTransactionDetails(result.data);
@@ -144,34 +149,6 @@ export class WalletTransactionsComponent implements OnInit {
     .subscribe(res => this.incomes = res);
   }
 
-  postTransaction() {
-    const id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
-    let date = new Date('dd/mm/yyyy');
-    // let finalDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(); 
-    // console.log(finalDate);
-    this.transactionModelObj.title = this.formValue.value.title;
-    this.transactionModelObj.description = this.formValue.value.description;
-    this.transactionModelObj.amount = this.formValue.value.amount;
-    this.transactionModelObj.type = this.formValue.value.type;
-    this.transactionModelObj.walletId = id;
-    // this.transactionModelObj.date = new Date();
-    this.transactionModelObj.date = 'test';
-    this.transactionModelObj.currency = this.formValue.value.currency;
-
-
-    this.transactionsService.postTransaction(this.transactionModelObj)
-    .subscribe(res => {
-      console.log(this.transactionModelObj);
-      alert("Transaction Added Succesfully");
-      this.formValue.reset();
-      this.transactionsData.push(res);
-      this.getWalletTransactions();
-    },
-    err => {
-      alert("Something went wrong");
-    })
-  }
-
   onEdit(transaction: any) {
     this.showAdd = false;
 
@@ -180,14 +157,18 @@ export class WalletTransactionsComponent implements OnInit {
     this.formValue.controls['type'].setValue(transaction.type);
     this.formValue.controls['description'].setValue(transaction.description);
     this.formValue.controls['amount'].setValue(transaction.amount);
-    this.formValue.controls['date'].setValue(transaction.date);
+    this.formValue.controls['date'].setValue(transaction.updatedAt);
   }
 
   deleteTransaction(transaction: any) {
     this.transactionsService.deleteTransaction(transaction.id).subscribe(res => {
       // this.showNotification('Transaction Deleted Succesfully', 'warning');
       this.getWalletTransactions();
+      this.getWalletExpenses();
+      this.getWalletIncomes();
     });
+
+    this.updateAtWallet();
   }
 
   updateTransactionDetails(data: any){
@@ -195,10 +176,11 @@ export class WalletTransactionsComponent implements OnInit {
     this.transactionModelObj.title = data.title;
     this.transactionModelObj.walletId = this.walletId;
     this.transactionModelObj.description = data.description;
-    this.transactionModelObj.type = data.type;
+    this.transactionModelObj.type = data.type.toLowerCase();
     this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = data.date;
+    // this.transactionModelObj.createdAt = data.createdAt.toLocaleDateString('en-GB');
+    this.transactionModelObj.updatedAt = data.date.toLocaleDateString('en-GB')
  
     this.transactionsService.updateTransaction(this.transactionModelObj, this.transactionModelObj.id)
     .subscribe(res => {
@@ -207,7 +189,11 @@ export class WalletTransactionsComponent implements OnInit {
       ref?.click() ;
       this.formValue.reset(); 
       this.getWalletTransactions();
+      this.getWalletExpenses();
+      this.getWalletIncomes();
     });
+
+    this.updateAtWallet();
   }
 
   clickAddTransaction() {
@@ -220,24 +206,35 @@ export class WalletTransactionsComponent implements OnInit {
     this.transactionModelObj.title = data.title;
     this.transactionModelObj.walletId = this.walletId;
     this.transactionModelObj.description = data.description;
-    this.transactionModelObj.type = data.type;
+    this.transactionModelObj.type = data.type.toLowerCase();
     this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.date = data.date;
+    this.transactionModelObj.createdAt = data.date.toLocaleDateString('en-GB');
+    this.transactionModelObj.updatedAt = data.date.toLocaleDateString('en-GB');
 
-    console.log('wallet-transactions_postTransactionDetails: ');
-    console.log(data);
     this.transactionsService.postTransaction(this.transactionModelObj)
     .subscribe(res => {
-      console.log(this.transactionModelObj);
       // this.showNotification('Transaction Added Succesfully', 'success');
       // data.reset();
       this.transactionsData.push(res);
       this.getWalletTransactions();
+      this.getWalletExpenses();
+      this.getWalletIncomes();
     },
     err => {
       // this.showNotification('Something went wrong', 'danger');
-    })
+    });
+
+    this.updateAtWallet();
+  }
+
+  updateAtWallet(): void {
+    this.walletModelObj.id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
+    this.walletModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
+    this.walletsService.updateWallet(this.walletModelObj, this.walletModelObj.id)
+    .subscribe(res => {
+      // this.showNotification('Wallet Updated Succesfully', 'info');
+    });
   }
 
   goBack(): void {

@@ -110,6 +110,8 @@ export class WalletsComponent implements OnInit {
     // this.walletsData[0].name = this.formValue.value.walletName;
     this.walletModelObj.owner = data.owner;
     // this.walletsData[0].owner = this.formValue.value.ownerName;
+    this.walletModelObj.createdAt = new Date().toLocaleDateString('en-GB');
+    this.walletModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
     this.walletModelObj.description = data.description;
     // this.walletsData[0].description = this.formValue.value.walletDescription;
 
@@ -148,6 +150,7 @@ export class WalletsComponent implements OnInit {
     this.walletModelObj.name = data.name;
     this.walletModelObj.owner = data.owner;
     this.walletModelObj.description = data.description;
+    this.walletModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
 
     this.walletsService.updateWallet(this.walletModelObj, this.walletModelObj.id)
     .subscribe(res => {
