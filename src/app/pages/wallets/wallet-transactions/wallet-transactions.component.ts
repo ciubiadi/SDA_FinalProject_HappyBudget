@@ -23,13 +23,12 @@ declare var $: any;
 })
 export class WalletTransactionsComponent implements OnInit {
   walletModelObj : WalletModel = new WalletModel();
-  // transactionModelObj : TransactionModel | undefined;
 
-  formValue !: FormGroup;
-  walletId !: any;
-  walletData !: any;
-  transactionModelObj : TransactionModel = new TransactionModel();
-  transactionsData !: any;
+  formValue: FormGroup;
+  walletId: any;
+  walletData: WalletModel = new WalletModel();
+  transactionModelObj: TransactionModel = new TransactionModel();
+  transactionsData: any;
   showAdd!: boolean;
   displayedColumns = ['title', 'description','type','amount','date','actions'];
   dataSource: MatTableDataSource<TransactionModel>;
@@ -40,7 +39,7 @@ export class WalletTransactionsComponent implements OnInit {
   expenses : any;
   incomes : any;
   options!: FormGroup;
-  
+
   constructor(
     private walletsService: WalletsService,
     private transactionsService: TransasctionsService,
@@ -60,7 +59,7 @@ export class WalletTransactionsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.walletData = this.getWallet();
+    this.getWallet();
     this.getWalletTransactions();
     this.getWalletExpenses();
     this.getWalletIncomes();
@@ -142,7 +141,7 @@ export class WalletTransactionsComponent implements OnInit {
     const id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
     this.walletsService.getWalletTransactions(id)
     .subscribe(res => {
-      this.transactionsData = res; 
+      this.transactionsData = res;
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -193,13 +192,13 @@ export class WalletTransactionsComponent implements OnInit {
     this.transactionModelObj.currency = "RON";
     // this.transactionModelObj.createdAt = data.createdAt.toLocaleDateString('en-GB');
     this.transactionModelObj.updatedAt = data.date.toLocaleDateString('en-GB')
- 
+
     this.transactionsService.updateTransaction(this.transactionModelObj, this.transactionModelObj.id)
     .subscribe(res => {
       // this.showNotification('Transaction Updated Succesfully', 'info');
       let ref = document.getElementById('cancel');
       ref?.click() ;
-      this.formValue.reset(); 
+      this.formValue.reset();
       this.getWalletTransactions();
       this.getWalletExpenses();
       this.getWalletIncomes();
@@ -280,7 +279,7 @@ export class WalletTransactionsComponent implements OnInit {
             from: 'bottom',
             align: 'right'
         },
-        template: 
+        template:
         '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
           '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
           '<i class="material-icons" data-notify="icon">{1}</i> ' +
