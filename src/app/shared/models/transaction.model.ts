@@ -5,8 +5,9 @@ export class TransactionModel {
     title: string = "";
     type: string = "";
     walletId: number = 0;
-    createdAt: Date = new Date();
-    updatedAt: Date = new Date();
+    date: Date = new Date();
+    createdAt: string = "";
+    updatedAt: string = "";
     // date: string = "";
     description:string = "";
     amount: number = 0;

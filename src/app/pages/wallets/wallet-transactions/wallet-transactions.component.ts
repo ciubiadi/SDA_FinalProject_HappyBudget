@@ -63,14 +63,6 @@ export class WalletTransactionsComponent implements OnInit {
     this.getWalletTransactions();
     this.getWalletExpenses();
     this.getWalletIncomes();
-
-    this.formValue =  this.formBuilder.group({
-      title : [''],
-      type : [''],
-      description : [''],
-      amount : [''],
-      date: null,
-    });
     this.dataSource = new MatTableDataSource();
   }
 
@@ -95,6 +87,7 @@ export class WalletTransactionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result!=undefined && result.data)
       {
+        console.log(result.data.date);
         this.postTransactionDetails(result.data);
       } else {
         console.log('The form was closed');
@@ -160,17 +153,6 @@ export class WalletTransactionsComponent implements OnInit {
     .subscribe(res => this.incomes = res);
   }
 
-  onEdit(transaction: any) {
-    this.showAdd = false;
-
-    this.transactionModelObj.id = transaction.id;
-    this.formValue.controls['title'].setValue(transaction.title);
-    this.formValue.controls['type'].setValue(transaction.type);
-    this.formValue.controls['description'].setValue(transaction.description);
-    this.formValue.controls['amount'].setValue(transaction.amount);
-    this.formValue.controls['date'].setValue(transaction.updatedAt);
-  }
-
   deleteTransaction(transaction: any) {
     this.transactionsService.deleteTransaction(transaction.id).subscribe(res => {
       // this.showNotification('Transaction Deleted Succesfully', 'warning');
@@ -191,14 +173,12 @@ export class WalletTransactionsComponent implements OnInit {
     this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
     // this.transactionModelObj.createdAt = data.createdAt.toLocaleDateString('en-GB');
-    this.transactionModelObj.updatedAt = data.date.toLocaleDateString('en-GB')
+    this.transactionModelObj.date = data.date.toLocaleDateString('en-GB');
+    this.transactionModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
 
     this.transactionsService.updateTransaction(this.transactionModelObj, this.transactionModelObj.id)
     .subscribe(res => {
       // this.showNotification('Transaction Updated Succesfully', 'info');
-      let ref = document.getElementById('cancel');
-      ref?.click() ;
-      this.formValue.reset();
       this.getWalletTransactions();
       this.getWalletExpenses();
       this.getWalletIncomes();
@@ -220,8 +200,9 @@ export class WalletTransactionsComponent implements OnInit {
     this.transactionModelObj.type = data.type.toLowerCase();
     this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
-    this.transactionModelObj.createdAt = data.date.toLocaleDateString('en-GB');
-    this.transactionModelObj.updatedAt = data.date.toLocaleDateString('en-GB');
+    this.transactionModelObj.date = data.date.toLocaleDateString('en-GB');
+    this.transactionModelObj.createdAt = new Date().toLocaleDateString('en-GB');
+    this.transactionModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
 
     this.transactionsService.postTransaction(this.transactionModelObj)
     .subscribe(res => {

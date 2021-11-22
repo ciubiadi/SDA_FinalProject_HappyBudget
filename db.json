@@ -13,7 +13,7 @@
       "name": "Wallet for investments",
       "owner": "Mihaa",
       "createdAt": "14/11/2021",
-      "updatedAt": "14/11/2021",
+      "updatedAt": "22/11/2021",
       "description": "To multily your money, you need to invest them"
     },
     {
@@ -51,10 +51,12 @@
       "title": "SEO Services",
       "type": "expense",
       "walletId": 3,
-      "createdAt": "18/11/2021",
-      "updatedAt": "10/11/2021",
+      "date": "2021-11-22T19:03:42.878Z",
+      "createdAt": "2021-11-22T19:03:42.878Z",
+      "updatedAt": "23/11/2021",
       "description": "Some Income Description",
       "amount": 18.24,
+      "categpries": "",
       "people": "",
       "currency": "RON"
     },
@@ -155,7 +157,7 @@
       "id": 11
     }
   ],
-  "categories":[ 
+  "categories": [
     {
       "id": 1,
       "name": "Food",
@@ -175,24 +177,24 @@
     {
       "id": 3,
       "name": "Games",
-      "createdAt":"08/11/2021",
-      "updatedAt":"11/11/2021",
+      "createdAt": "08/11/2021",
+      "updatedAt": "11/11/2021",
       "description": "Category for game bundles, skins, etc.",
       "transactionId": 3
     },
     {
       "id": 4,
       "name": "Something",
-      "createdAt":"08/11/2021",
-      "updatedAt":"11/11/2021",
+      "createdAt": "08/11/2021",
+      "updatedAt": "11/11/2021",
       "description": "Category for game bundles, skins, etc.",
       "transactionId": 1
     },
     {
       "id": 5,
       "name": "Something",
-      "createdAt":"08/11/2021",
-      "updatedAt":"11/11/2021",
+      "createdAt": "08/11/2021",
+      "updatedAt": "11/11/2021",
       "description": "Category for game bundles, skins, etc.",
       "transactionId": 5
     }
@@ -200,15 +202,15 @@
   "users": [
     {
       "id": 1,
-      "firstname":"Adrian",
-      "lastname":"Ciubi",
+      "firstname": "Adrian",
+      "lastname": "Ciubi",
       "email": "ciubucciu.adrianalbert@gmail.com",
       "phone": "0740170397"
     },
     {
       "id": 2,
-      "firstname":"Miha",
-      "lastname":"Ciubi",
+      "firstname": "Miha",
+      "lastname": "Ciubi",
       "email": "hnc.mihaela@gmail.com",
       "phone": "0740170123"
     }
