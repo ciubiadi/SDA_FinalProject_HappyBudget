@@ -46,7 +46,7 @@ export enum TransactionTypes {
 }
 
 export enum TransactionStatuses {
-  Pending = 'pending',
+  Scheduled = 'scheduled',
   Done = 'done'
 }
 

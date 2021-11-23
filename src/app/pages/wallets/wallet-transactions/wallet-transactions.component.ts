@@ -38,7 +38,7 @@ export class WalletTransactionsComponent implements OnInit {
   colorControl = new FormControl('primary');
   expenses : any;
   incomes : any;
-  pending : any;
+  scheduled : any;
   done : any;
 
   options!: FormGroup;
