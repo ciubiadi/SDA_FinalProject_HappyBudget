@@ -30,7 +30,7 @@ export class WalletTransactionsComponent implements OnInit {
   transactionModelObj: TransactionModel = new TransactionModel();
   transactionsData: any;
   showAdd!: boolean;
-  displayedColumns = ['title', 'description','type', 'status', 'amount','date','actions'];
+  displayedColumns = ['title', 'description','type','amount','date','status','actions'];
   dataSource: MatTableDataSource<TransactionModel>;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
