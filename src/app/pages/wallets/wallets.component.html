@@ -132,7 +132,7 @@
               </ng-container>
               <ng-container matColumnDef="owner">
                 <th mat-header-cell *matHeaderCellDef scope="col">description</th>
-                <td mat-cell *matCellDef="let wallet">{{ wallet.description }}</td>
+                <td title="short description" mat-cell *matCellDef="let wallet">{{ (wallet.description.length>20) ? (wallet.description | slice:0:20)+ ' ... ' : (wallet.description) }}</td>
               </ng-container>
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef scope="col" class="text-center">actions</th>
@@ -151,7 +151,7 @@
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="thead-light"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-              
+
               <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
               </tr>

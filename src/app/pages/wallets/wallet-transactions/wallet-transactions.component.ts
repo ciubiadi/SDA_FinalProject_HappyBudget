@@ -30,7 +30,7 @@ export class WalletTransactionsComponent implements OnInit {
   transactionModelObj: TransactionModel = new TransactionModel();
   transactionsData: any;
   showAdd!: boolean;
-  displayedColumns = ['title', 'description','type','amount','date','actions'];
+  displayedColumns = ['title', 'description','type', 'status', 'amount','date','actions'];
   dataSource: MatTableDataSource<TransactionModel>;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -38,6 +38,9 @@ export class WalletTransactionsComponent implements OnInit {
   colorControl = new FormControl('primary');
   expenses : any;
   incomes : any;
+  pending : any;
+  done : any;
+
   options!: FormGroup;
 
   constructor(
@@ -170,9 +173,9 @@ export class WalletTransactionsComponent implements OnInit {
     this.transactionModelObj.walletId = this.walletId;
     this.transactionModelObj.description = data.description;
     this.transactionModelObj.type = data.type.toLowerCase();
+    this.transactionModelObj.status = data.status.toLowerCase();
     this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
-    // this.transactionModelObj.createdAt = data.createdAt.toLocaleDateString('en-GB');
     this.transactionModelObj.date = data.date.toLocaleDateString('en-GB');
     this.transactionModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
 
@@ -198,6 +201,7 @@ export class WalletTransactionsComponent implements OnInit {
     this.transactionModelObj.walletId = this.walletId;
     this.transactionModelObj.description = data.description;
     this.transactionModelObj.type = data.type.toLowerCase();
+    this.transactionModelObj.status = data.status.toLowerCase();
     this.transactionModelObj.amount = data.amount;
     this.transactionModelObj.currency = "RON";
     this.transactionModelObj.date = data.date.toLocaleDateString('en-GB');
@@ -221,7 +225,6 @@ export class WalletTransactionsComponent implements OnInit {
   }
 
   updateAtWallet(): void {
-    console.log(this.walletModelObj);
     this.walletModelObj = this.walletData;
     this.walletModelObj.id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
     this.walletModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
@@ -233,44 +236,5 @@ export class WalletTransactionsComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
-  }
-
-  showNotification(msg, typeColor){
-    let iconType = '';
-    switch(typeColor) {
-      case 'danger':
-        iconType = 'error_outline';
-        break;
-      case 'warning':
-        iconType = 'delete_forever';
-        break;
-      case 'success':
-        iconType = 'task_alt';
-        break;
-      default:
-        iconType = 'notifications'
-    }
-    $.notify({
-        title: iconType,
-        message: msg
-    },{
-        type: typeColor,
-        timer: 50000,
-        placement: {
-            from: 'bottom',
-            align: 'right'
-        },
-        template:
-        '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-          '<i class="material-icons" data-notify="icon">{1}</i> ' +
-          // '<span data-notify="title"></span> ' +
-          '<span data-notify="message">{2}</span>' +
-          '<div class="progress" data-notify="progressbar">' +
-            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-          '</div>' +
-          '<a href="{3}" target="{4}" data-notify="url"></a>' +
-        '</div>'
-    });
   }
 }

@@ -4,16 +4,16 @@
       "id": 1,
       "name": "Wallet For Games",
       "owner": "Ciubi",
-      "createdAt": "14/11/2021",
-      "updatedAt": "21/11/2021",
-      "description": "This is a walletfor games"
+      "createdAt": "",
+      "updatedAt": "23/11/2021",
+      "description": "This is a wallet for games"
     },
     {
       "id": 3,
       "name": "Wallet for investments",
       "owner": "Mihaa",
       "createdAt": "14/11/2021",
-      "updatedAt": "22/11/2021",
+      "updatedAt": "14/11/2021",
       "description": "To multily your money, you need to invest them"
     },
     {
@@ -38,6 +38,7 @@
       "id": 2,
       "title": "Freelancer Website Project",
       "type": "income",
+      "status": "done",
       "walletId": 3,
       "createdAt": "18/11/2021",
       "updatedAt": "11/11/2021",
@@ -50,13 +51,12 @@
       "id": 3,
       "title": "SEO Services",
       "type": "expense",
+      "status": "done",
       "walletId": 3,
-      "date": "2021-11-22T19:03:42.878Z",
-      "createdAt": "2021-11-22T19:03:42.878Z",
-      "updatedAt": "23/11/2021",
+      "createdAt": "18/11/2021",
+      "updatedAt": "10/11/2021",
       "description": "Some Income Description",
       "amount": 18.24,
-      "categpries": "",
       "people": "",
       "currency": "RON"
     },
@@ -64,6 +64,7 @@
       "id": 4,
       "title": "Music Show Pub Test",
       "type": "income",
+      "status": "done",
       "walletId": 3,
       "createdAt": "18/11/2021",
       "updatedAt": "18/11/2021",
@@ -75,6 +76,7 @@
     {
       "title": "Test Transaction 1",
       "type": "expense",
+      "status": "done",
       "walletId": 4,
       "createdAt": "21/11/2021",
       "updatedAt": "21/11/2021",
@@ -87,6 +89,7 @@
     {
       "title": "Test Transaction 2",
       "type": "income",
+      "status": "done",
       "walletId": 4,
       "createdAt": "05/11/2021",
       "updatedAt": "05/11/2021",
@@ -97,20 +100,24 @@
       "id": 6
     },
     {
+      "id": 7,
       "title": "First transaction",
       "type": "income",
+      "status": "pending",
       "walletId": 1,
-      "createdAt": "08/11/2021",
-      "updatedAt": "08/11/2021",
-      "description": "salary",
+      "date": "23/11/2021",
+      "createdAt": "",
+      "updatedAt": "23/11/2021",
+      "description": "testsetsetsetsetsetest setse tse tse tes tse tes tse tse se tset set se tse tse tset set set set",
       "amount": "321312",
+      "categpries": "",
       "people": "",
-      "currency": "RON",
-      "id": 7
+      "currency": "RON"
     },
     {
       "title": "first expense",
       "type": "expense",
+      "status": "done",
       "walletId": 1,
       "createdAt": "17/11/2021",
       "updatedAt": "17/11/2021",
@@ -123,6 +130,7 @@
     {
       "title": "testse",
       "type": "expense",
+      "status": "pending",
       "walletId": 5,
       "createdAt": "16/11/2021",
       "updatedAt": "16/11/2021",
@@ -147,6 +155,7 @@
     {
       "title": "dada",
       "type": "income",
+      "status": "done",
       "walletId": 5,
       "createdAt": "22/12/2021",
       "updatedAt": "22/12/2021",
@@ -163,40 +172,35 @@
       "name": "Food",
       "createdAt": "05/11/2021",
       "updatedAt": "08/11/2021",
-      "description": "Category for food transactions",
-      "transactionId": 2
+      "description": "Category for food transactions"
     },
     {
       "id": 2,
       "name": "Utilities",
       "createdAt": "05/11/2021",
       "updatedAt": "08/11/2021",
-      "description": "Category for Utilities",
-      "transactionId": 4
+      "description": "Category for Utilities"
     },
     {
       "id": 3,
       "name": "Games",
       "createdAt": "08/11/2021",
       "updatedAt": "11/11/2021",
-      "description": "Category for game bundles, skins, etc.",
-      "transactionId": 3
+      "description": "Category for game bundles, skins, etc."
     },
     {
       "id": 4,
       "name": "Something",
       "createdAt": "08/11/2021",
       "updatedAt": "11/11/2021",
-      "description": "Category for game bundles, skins, etc.",
-      "transactionId": 1
+      "description": "Category for game bundles, skins, etc."
     },
     {
       "id": 5,
       "name": "Something",
       "createdAt": "08/11/2021",
       "updatedAt": "11/11/2021",
-      "description": "Category for game bundles, skins, etc.",
-      "transactionId": 5
+      "description": "Category for game bundles, skins, etc."
     }
   ],
   "users": [

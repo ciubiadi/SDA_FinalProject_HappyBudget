@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 export class TransasctionsService {
 
   private transactionsUrl = 'http://localhost:3000/transactions/';
-  
+
   constructor(private http : HttpClient) { }
 
   getTransactions() {
@@ -43,6 +43,11 @@ export class TransasctionsService {
 export enum TransactionTypes {
   Expense = 'expense',
   Income = 'income'
+}
+
+export enum TransactionStatuses {
+  Pending = 'pending',
+  Done = 'done'
 }
 
 export enum CurrencyTypes {

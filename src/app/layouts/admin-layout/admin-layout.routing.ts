@@ -7,10 +7,12 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { WalletsComponent } from 'src/app/pages/wallets/wallets.component';
 import { WalletTransactionsComponent } from 'src/app/pages/wallets/wallet-transactions/wallet-transactions.component';
+import { CategoriesComponent } from 'src/app/pages/categories/categories.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',            component: DashboardComponent },
     { path: 'wallets',              component: WalletsComponent},
+    { path: 'categories',           component: CategoriesComponent},
     { path: 'wallets/:walletId',    component: WalletTransactionsComponent},
     { path: 'user-profile',         component: UserProfileComponent },
     { path: 'tables',               component: TablesComponent },

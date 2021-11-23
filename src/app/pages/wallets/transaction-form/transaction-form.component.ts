@@ -2,7 +2,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { TransactionTypes } from 'src/app/shared/services/transasctions.service';
+import { TransactionStatuses, TransactionTypes } from 'src/app/shared/services/transasctions.service';
 import { WalletTransactionsComponent } from '../wallet-transactions/wallet-transactions.component';
 import { DialogData } from '../wallets.component';
 
@@ -20,6 +20,9 @@ export class TransactionFormComponent implements OnInit {
   StateTransactionTypes = TransactionTypes;
   enumTransactionTypes=[];
 
+  StateTransactionStatuses = TransactionStatuses;
+  enumTransactionStatuses=[];
+
   constructor(
     // public dialogRef: MatDialogRef<WalletFormComponent>, !!DON'T KNOW WHICH VARIANT IS CORRECT!!!
     public dialogRef: MatDialogRef<WalletTransactionsComponent>,
@@ -27,6 +30,7 @@ export class TransactionFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.enumTransactionTypes=Object.keys(this.StateTransactionTypes);
+    this.enumTransactionStatuses=Object.keys(this.StateTransactionStatuses);
    }
 
   ngOnInit(): void {
@@ -36,6 +40,7 @@ export class TransactionFormComponent implements OnInit {
         title : [''],
         description : [''],
         type : [''],
+        status : [''],
         amount: [''],
         date: null,
       });
@@ -45,6 +50,7 @@ export class TransactionFormComponent implements OnInit {
         id : this.data['transaction']['id'],
         title : this.data['transaction']['title'],
         type : this.data['transaction']['type'],
+        status : this.data['transaction']['status'],
         description : this.data['transaction']['description'],
         amount: this.data['transaction']['amount'],
         date: this.data['transaction']['date']

@@ -20,7 +20,7 @@ export interface DialogData {
 })
 export class WalletsComponent implements OnInit {
 
-  walletWord !: any;  
+  walletWord !: any;
   formValue !: FormGroup;
   walletModelObj : WalletModel = new WalletModel();
   walletsData !: any;
@@ -34,7 +34,7 @@ export class WalletsComponent implements OnInit {
     private walletsService: WalletsService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog
-  ) { 
+  ) {
     this.getAllWallets();
   }
 
@@ -43,7 +43,7 @@ export class WalletsComponent implements OnInit {
     this.formValue =  this.formBuilder.group({
       name : [''],
       owner : [''],
-      description : [''] 
+      description : ['']
     });
     this.dataSource = new MatTableDataSource();
   }
@@ -97,7 +97,7 @@ export class WalletsComponent implements OnInit {
       this.dataSource.sort = this.sort;
     })
   }
-  
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
@@ -186,7 +186,7 @@ export class WalletsComponent implements OnInit {
             from: 'bottom',
             align: 'right'
         },
-        template: 
+        template:
         '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
           '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
           '<i class="material-icons" data-notify="icon">{1}</i> ' +

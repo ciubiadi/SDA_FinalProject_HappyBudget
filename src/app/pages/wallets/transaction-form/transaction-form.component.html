@@ -12,12 +12,21 @@
                     <mat-option *ngFor="let transactiontype of enumTransactionTypes" [value]="transactiontype">
                       {{StateTransactionTypes[transactiontype]}}
                     </mat-option>
-                </mat-select>    
+                </mat-select>
                 <!-- <input type="text" formControlName="type" id="type" aria-describedby="type" matInput> -->
             </mat-form-field>
             <mat-form-field class="form-field-full-width" appearance="fill">
+              <mat-label for="type">Transaction Status</mat-label>
+              <mat-select formControlName="status" id="status" aria-describedby="status">
+                  <mat-option *ngFor="let transactionstatus of enumTransactionStatuses" [value]="transactionstatus">
+                    {{StateTransactionStatuses[transactionstatus]}}
+                  </mat-option>
+              </mat-select>
+              <!-- <input type="text" formControlName="type" id="type" aria-describedby="type" matInput> -->
+          </mat-form-field>
+            <mat-form-field class="form-field-full-width" appearance="fill">
                 <mat-label for="description">Transaction Description</mat-label>
-                <textarea type="text" formControlName="description" id="description" aria-describedby="tydescriptionpe" 
+                <textarea type="text" formControlName="description" id="description" aria-describedby="tydescriptionpe"
                 max-rows="2" placeholder="Ex: This transaction purpose is for ..." matInput></textarea>
             </mat-form-field>
             <mat-form-field class="form-field-full-width" appearance="fill">
