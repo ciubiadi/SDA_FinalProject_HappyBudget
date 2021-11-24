@@ -18,7 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [],
   imports: [
@@ -40,7 +40,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule
   ],
   exports: [
     CommonModule,
@@ -61,7 +62,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule { }
