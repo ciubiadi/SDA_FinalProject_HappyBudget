@@ -16,7 +16,6 @@ export class WalletFormComponent implements OnInit {
   formValue !: FormGroup;
 
   constructor(
-    // public dialogRef: MatDialogRef<WalletFormComponent>, !!DON'T KNOW WHICH VARIANT IS CORRECT!!!
     public dialogRef: MatDialogRef<WalletsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private formBuilder: FormBuilder

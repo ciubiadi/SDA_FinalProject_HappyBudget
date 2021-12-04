@@ -164,7 +164,7 @@ export class WalletTransactionsComponent implements OnInit {
       this.getWalletIncomes();
     });
 
-    this.updateAtWallet();
+    this.updateAtWallet(transaction,'delete');
   }
 
   updateTransactionDetails(data: any){
@@ -187,7 +187,7 @@ export class WalletTransactionsComponent implements OnInit {
       this.getWalletIncomes();
     });
 
-    this.updateAtWallet();
+    this.updateAtWallet(data, 'update');
   }
 
   clickAddTransaction() {
@@ -221,13 +221,25 @@ export class WalletTransactionsComponent implements OnInit {
       // this.showNotification('Something went wrong', 'danger');
     });
 
-    this.updateAtWallet();
+    this.updateAtWallet(data, 'post');
   }
 
-  updateAtWallet(): void {
+  updateAtWallet(data: any, action: string): void {
     this.walletModelObj = this.walletData;
     this.walletModelObj.id = parseInt(this.route.snapshot.paramMap.get('walletId')!, 10);
     this.walletModelObj.updatedAt = new Date().toLocaleDateString('en-GB');
+    console.log(data);
+    console.log(this.walletModelObj.budget);
+    console.log(this.walletData);
+    if(action != 'delete') {
+      data.type.toLowerCase() == "income" ? this.walletModelObj.budget += parseFloat(data.amount) : this.walletModelObj.budget -= parseFloat(data.amount);
+      // if(data.type.toLowerCase() == "income")
+      //   this.walletModelObj.budget += parseFloat(data.amount);
+      // else
+      //   this.walletModelObj.budget -= parseFloat(data.amount);
+    } else {
+      data.type.toLowerCase() == "income" ? this.walletModelObj.budget -= parseFloat(data.amount) : this.walletModelObj.budget += parseFloat(data.amount);
+    }
     this.walletsService.updateWallet(this.walletModelObj, this.walletModelObj.id)
     .subscribe(res => {
       // this.showNotification('Wallet Updated Succesfully', 'info');
