@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Wallet For Games",
       "owner": "Ciubi",
-      "budget": 0,
+      "budget": 3239,
       "createdAt": "14/11/2021",
       "updatedAt": "01/12/2021",
       "description": "This is a walletfor games"
@@ -13,7 +13,7 @@
       "id": 3,
       "name": "Wallet For Investments",
       "owner": "Mihaa",
-      "budget": 230,
+      "budget": 36.48,
       "createdAt": "14/11/2021",
       "updatedAt": "04/12/2021",
       "description": "To multily your money, you need to invest them"
@@ -22,7 +22,7 @@
       "id": 4,
       "name": "Wallet For Tests",
       "owner": "Ciubi",
-      "budget": 0,
+      "budget": -103,
       "createdAt": "14/10/2010",
       "updatedAt": "23/11/2021",
       "description": "dasdasdsaas dass das das das"
@@ -31,9 +31,9 @@
       "id": 5,
       "name": "Test wallet",
       "owner": "Ciubi",
-      "budget": 0,
+      "budget": 1973,
       "createdAt": "14/11/2021",
-      "updatedAt": "23/11/2021",
+      "updatedAt": "04/12/2021",
       "description": "test Wallet description"
     }
   ],
@@ -147,20 +147,6 @@
       "updatedAt": "23/11/2021",
       "description": "dasdas",
       "amount": "3214",
-      "people": "",
-      "currency": "RON"
-    },
-    {
-      "id": 11,
-      "title": "dada",
-      "type": "income",
-      "status": "done",
-      "walletId": 5,
-      "date": "17/11/2021",
-      "createdAt": "14/11/2021",
-      "updatedAt": "23/11/2021",
-      "description": "test",
-      "amount": "53421",
       "people": "",
       "currency": "RON"
     },
