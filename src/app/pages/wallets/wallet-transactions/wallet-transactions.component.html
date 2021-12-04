@@ -147,6 +147,15 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Description</th>
                 <td title="short description" mat-cell *matCellDef="let transaction">{{ (transaction.description.length>20) ? (transaction.description | slice:0:20)+ ' ... ' : (transaction.description) }}</td>
             </ng-container>
+            <ng-container matColumnDef="categories">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Categories</th>
+              <td mat-cell *matCellDef="let transaction">
+                <mat-chip-list aria-label="Transaction Categories">
+                  <mat-chip>Household</mat-chip>
+                  <mat-chip color="primary" selected>Primary category</mat-chip>
+                </mat-chip-list>
+              </td>
+          </ng-container>
             <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary">Type</th>
                 <td mat-cell *matCellDef="let transaction" class="text-uppercase font-weight-bold"
