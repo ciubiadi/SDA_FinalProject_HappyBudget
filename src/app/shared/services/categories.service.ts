@@ -19,7 +19,7 @@ export class CategoriesService {
     private http: HttpClient
   ) { }
 
-   /* WALLETS */
+   /* CATEGORIES */
    postCategory(data : any) {
     return this.http.post<any>(this.categoriesUrl, data)
     .pipe(map((res : any) => {
@@ -36,20 +36,6 @@ export class CategoriesService {
 
   getCategory(id: number) {
     return this.http.get<any>(this.categoriesUrl + id)
-    .pipe(map((res : any) => {
-      return res;
-    }))
-  }
-
-  getWalletTransactions(id: number) {
-    return this.http.get<any>(this.categoriesUrl + id + "/transactions")
-    .pipe(map((res : any) => {
-      return res;
-    }))
-  }
-
-  getWalletTransactionsType(id: number, type: string) {
-    return this.http.get<any>(this.categoriesUrl + id + "/transactions?type=" + type)
     .pipe(map((res : any) => {
       return res;
     }))
